@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link type="text/css" href="vendor/volt/css/volt.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-md-none" id="nav_mobile">
+    
+  </nav>
+
+  <div class="container-fluid bg-soft">
+    <div class="row">
+      <div class="col-12">
+
+        <nav id="sidebarMenu" class="sidebar d-md-block bg-primary text-white collapse" data-simplebar>
+          
+        </nav>
+
+        <main class="content">
+	        <nav class="navbar navbar-top navbar-expand navbar-dashboard navbar-dark pl-0 pr-2 pb-0">
+	            <div class="container-fluid px-0">
+	              <div class="d-flex justify-content-between w-100" id="navbarSupportedContent">
+	                <div class="d-flex">
+
+	                </div>
+	                <!-- Navbar links -->
+	                <ul class="navbar-nav align-items-center" id="nav_header"></ul>
+	              </div>
+	            </div>
+	        </nav>
+
+        <div class="container-fluid">
+          	<div class="row">
+				<hr />
+				<div class="mb-4 mb-md-0" id="breadcumb"></div>
+          		<div class="col-md-8">
+                	<h1 class="title-4"></h1>
+                	<h1 class="title-4"><span style="font-size: 16px"><i class="fas fa-align-justify"></i> Empleados de la Institucion. </span></h1>
+             	</div>
+        	</div>
+    	</div>
+
+
+        <div class="container-fluid">
+          	<div class="row">
+            	<div class="col-md-12">
+            		<button id="addaction" class="btn btn-primary" style="font-size: 12px" title="Nuevo"><i class="fa fa-plus"></i>&nbsp;Nuevo</button>
+              		<button class="btnreport" onclick="printreport('Empleados',1)" title="CSV"><i class="fas fa-file-csv"></i></button>
+              		<button class="btnreport" onclick="printreport('Empleados',2)" title="XLS"><i class="fas fa-file-excel"></i></button>
+              		<button class="btnreport" onclick="printreport('Empleados',3)" title="PDF"><i class="fas fa-file-pdf"></i></button>
+			  		<div style="float:right">
+						<input type="text" class="form-control" placeholder="Buscar..." id="filter">
+			  		</div>
+				</div>
+            	<div class="col-md-12">
+              		<div id="tablaprincipal"></div>
+            	</div>
+          	</div>
+        </div>
+
+    </main>
+
+    <div class="modal" id="addmodal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><i class="fas fa-file-alt"></i> Creaci&oacute;n de Personas</h5>
+            <button type="button" id="aclosemyModal" class="close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <form id="addform">
+              	<div class="row">
+            		<div class="col-md-6 mb-3">
+	                	<label for="">Nombre</label>
+	                	<input aria-required="true" type="text" name="nombre" class="form-control form-control-sm" id="nombre" placeholder="Nombre" required>
+              		</div>
+              		<div class="col-md-6 mb-3">
+	                	<label for="">Nacimiento</label>
+	                	<input aria-required="true" type="date" name="fecha_nacimiento" class="form-control form-control-sm" id="fecha_nacimiento" placeholder="Fecha Nacimiento" required>
+              		</div>
+            	</div>
+            	<div class="row">
+            		<div class="col-md-6 mb-3">
+	                	<label for="">Pais</label>
+	                	<select aria-required="true" name="fk_pais" class="form-control form-control-sm" id="fk_pais">
+	                		<option value=" ">Seleccionar Pais</option>
+	                	</select>
+              		</div>
+              		<div class="col-md-6 mb-3">
+	                	<label for="">Nacionalidad</label>
+	                	<select aria-readonly="true" name="fk_nacionalidad" class="form-control form-control-sm" id="fk_nacionalidad">
+	                	</select>
+              		</div>
+            	</div>               
+            	<div class="modal-footer">
+					<button type="submit" title="Crear" class="btn btn-primary"><i class="fas fa-file-alt"></i>&nbsp;Crear</button>
+					<button type="button" id="acancelmyModal" class="btn btn-warning"><i class="fas fa-ban"></i>&nbsp;Cancelar</button>
+            	</div>
+            </form>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div>
+    </div>
+
+    <div class="modal" id="updmodal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><i class="fas fa-file-alt"></i> Actualizaci&oacute;n de Persona</h5>
+            <button type="button" id="uclosemyModal" class="close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+          	<form id="updform">
+	            <input type="hidden" id="upd_Id" name="upd_Id">
+	            <div class="row">
+            		<div class="col-md-6 mb-3">
+	                	<label for="">Nombre</label>
+	                	<input aria-required="true" type="text" name="upd_nombre" class="form-control form-control-sm" id="upd_nombre" placeholder="Nombre" required>
+              		</div>
+              		<div class="col-md-6 mb-3">
+	                	<label for="">Nacimiento</label>
+	                	<input aria-required="true" type="date" name="upd_fecha_nacimiento" class="form-control form-control-sm" id="upd_fecha_nacimiento" placeholder="Fecha Nacimiento" required>
+              		</div>
+            	</div>
+            	<div class="row">
+            		<div class="col-md-6 mb-3">
+	                	<label for="">Pais</label>
+	                	<select aria-required="true" name="upd_fk_pais" class="form-control form-control-sm" id="upd_fk_pais">
+	                		<option value=" ">Seleccionar Pais</option>
+	                	</select>
+              		</div>
+              		<div class="col-md-6 mb-3">
+	                	<label for="">Nacionalidad</label>
+	                	<select aria-readonly="true" name="upd_fk_nacionalidad" class="form-control form-control-sm" id="upd_fk_nacionalidad">
+	                	</select>
+              		</div>
+            	</div>                   
+	            <div class="modal-footer">
+					<button type="submit" title="Actualizar" class="btn btn-primary"><i class="fas fa-file-alt"></i>&nbsp;Actualizar</button>
+					<button type="button" id="ucancelmyModal" class="btn btn-warning"><i class="fas fa-ban"></i>&nbsp;Cancelar</button>
+	            </div>
+        	</form>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div>
+    </div>
+
+    <footer class="footer estilofooter" id="footer"></footer>
+	<script src="app/general/mainstructure.js"></script>
+	<script src="app/general/libreriasjs.js"></script>
+	<script src="app/general/general.js"></script>
+	<script src="app/empleado/controller/empleado_controller.js"></script>
+
+</body>
+<script>
+	window.onload = breadcumb("Personas","Gesti&oacute;n de Personas")
+	listar()
+	paislistar()
+	u_paislistar()
+
+	function listar(){
+		fetchGetPublico('persona').then((result) => {
+			let responseJson = result;
+		  	table.setData(JSON.stringify(responseJson))
+		});
+	}
+
+	
+	actualizar.addEventListener("submit", function(e){
+		e.preventDefault()
+		id = document.querySelector("#upd_Id").value
+		const data = { nombre:document.querySelector("#upd_nombre").value,
+		nacimiento:document.querySelector("#upd_fecha_nacimiento").value,
+		pais:document.querySelector("#upd_fk_pais").value };
+		fetchPutPublico('persona/'+id+'/',data).then((result)=>{
+			let responseJson = result;
+			console.log(responseJson)
+			listar()
+			updmodal.style.display = "none";
+			notyf.open({
+			type: 'info',
+				message: 'Registro Actualizada para '+document.querySelector("#upd_nombre").value+'.'
+			});
+		});
+	}) // End actualizar function
+
+	guardar.addEventListener("submit", function(e){
+		e.preventDefault()
+		const data = { nombre:document.querySelector("#nombre").value,nacimiento:document.querySelector("#fecha_nacimiento").value,
+		pais:document.querySelector("#fk_pais").value };
+		fetchPostPublico('persona',data).then((result)=>{
+		  	let responseJson = result;
+			addmodal.style.display = "none";
+			listar()
+			notyf.open({
+    			type: 'info',
+    			message: 'Registro Creado para '+document.querySelector("#nombre").value
+			});
+		});
+		
+	}); // End actualizar function
+
+	var rowMenu = [
+		{
+			label:"<i class='fas fa-user'></i> Editar Registro",
+			action:function(e, row){
+				fetchGetPublico('persona/'+row.getData().id+'/').then((result) =>{
+				  	let responseJson = result;
+					updmodal.style.display = "block";
+					document.querySelector("#upd_Id").value = responseJson.id
+					document.querySelector("#upd_nombre").value = responseJson.nombre
+					document.querySelector("#upd_fecha_nacimiento").value = responseJson.nacimiento
+					document.querySelector("#upd_fk_pais").value = responseJson.Nacionalidad.id
+					document.querySelector("#upd_fk_nacionalidad").innerHTML = "<option>"+responseJson.Nacionalidad.nacionalidad+"</option>"
+				});
+			} // End Action Editar Registro
+		},
+		{
+			label:"<i class='fas fa-trash'></i> Desactivar Persona",
+			action:function(e, row){
+				alertify.confirm("<i class='fas fa-exclamation-triangle' style='color:#dc3545'></i> &iquest;Esta seguro de Eliminar el Registro&#63;.",
+				function(){
+					
+				  fetchDeletePublico('persona/'+row.getData().id+'/').then((result) =>{
+					let responseJson = result;
+						notyf.open({
+    						type: 'info',
+    						message: 'Desactivado Correctamente.'
+						}); 
+					  	row.delete()
+				  	});
+				},
+				function(){
+					notyf.open({
+    					type: 'warning',
+    					message: 'Cancelada la transaccion.'
+					});
+				}).setHeader('<em> <i class="fas fa-trash"></i>&nbsp;Eliminar Registro </em> ');
+			}
+		},
+	]
+
+	var table = new Tabulator("#tablaprincipal",{
+		resizableColumns:false,
+		height:"auto",
+		layout:"fitColumns",
+		responsiveLayout:"collapse",
+		responsiveLayoutCollapseStartOpen:false,
+		rowContextMenu: rowMenu,
+		tooltips:true,
+		pagination:"local",
+		paginationSize:10,
+		placeholder:"No hay Registros",
+		initialSort:[
+			{column:"nombre", dir:"desc"}, //sort by this first
+		],
+		columns:[
+		  	{formatter:"responsiveCollapse",width:30, minWidth:30,hozAlign:"center", resizable:false},
+		  	{formatter:"rownum", hozAlign:"center", width:40},
+		  	{title:"Nombre",field:"nombre",hozAlign:"center",minWidth:210,responsive:2},
+		  	{title:"Nacimiento",field:"nacimiento",hozAlign:"center",minWidth:100,responsive:3},
+		  	{title:"Pais",field:"Nacionalidad.nombre_pais",hozAlign:"center",minWidth:210,responsive:2},
+			{title:"Nacionalidad",field:"Nacionalidad.nacionalidad",hozAlign:"center",minWidth:210,responsive:2},
+		],
+	});
+
+	var inputdate = document.getElementById("fecha_nacimiento")
+	inputdate.addEventListener("change",function(){
+		edad = calcularEdad(inputdate.value)
+		if(edad <= 18){
+			notyf.open({
+    					type: 'warning',
+    					message: 'Debes ser mayor de edad.'
+			});
+		}
+	})
+
+	function calcularEdad(fecha_nacimiento) {
+			var hoy = new Date();
+			var cumpleanos = new Date(fecha_nacimiento);
+			var edad = hoy.getFullYear() - cumpleanos.getFullYear();
+			var m = hoy.getMonth() - cumpleanos.getMonth();
+			if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
+				edad--;
+			}
+			return edad;
+	}
+</script>
+</html>
+<!-- end document-->

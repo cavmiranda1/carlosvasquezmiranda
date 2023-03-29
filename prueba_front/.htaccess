@@ -1,0 +1,26 @@
+Options All -Indexes
+Order Allow,Deny
+Allow from all
+RewriteEngine On
+ErrorDocument 404 /Calderon_Front/app/error/404.html
+ErrorDocument 500 /Calderon_Front/app/error/500.html
+ErrorDocument 403 /Calderon_Front/app/error/403.html
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.html [NC]
+RewriteRule ^ %1 [R,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html
+
+<FilesMatch "\.(htaccess|htpasswd|ini|phps|log|bak|txt)$">
+ Order Allow,Deny
+ Deny from all
+</FilesMatch>
+
+AddType image/svg+xml svg svgz
+AddEncoding gzip svgz
+
+RewriteRule ^login$ index.html [L,NC]
+RewriteRule ^home$ app/dashboard/index.html [L,NC]
+RewriteRule ^empleado$ app/empleado/empleado.html [L,NC]

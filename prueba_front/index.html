@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- Primary Meta Tags -->
+    <title>Grupo Calderon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="title" content="Iducron Sistema Academico">
+    <meta name="author" content="Iducron">
+    <meta name="description" content="Sistema Academico para la administracion escolar.">
+    <meta name="keywords" content="academico,sistema educativo,plataforma educativa, sistema academico,iducron" />
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon/favicon-16x16.png">
+    <link rel="mask-icon" href="assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">
+    <!-- Fontawesome -->
+    <link type="text/css" href="vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <!-- Notyf -->
+    <link type="text/css" href="vendor/notyf/notyf.min.css" rel="stylesheet">
+    <!-- Volt CSS -->
+    <link type="text/css" href="vendor/volt/css/volt.css" rel="stylesheet">
+    <script>
+        if (sessionStorage.length != 0) {
+            location.href = 'empleado';
+        } // End if
+    </script>
+</head>
+
+<body class="bg-soft">
+    <main>
+
+        <!-- Section -->
+        <section class="vh-lg-100 d-flex align-items-center">
+            <div class="container">
+                <div class="row justify-content-center form-bg-image" style="background: url('assets/img/ilustraciones/signin.svg')">
+                    <div class="col-12 d-flex align-items-center justify-content-center">
+                        <div class="signin-inner my-3 my-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+                            <div class="text-center text-md-center mb-4 mt-md-0">
+                                <h1 class="mb-0 h3">Iniciar Sesi&oacute;n</h1>
+                            </div>
+                            <form action="#" class="mt-4">
+                                <!-- Form -->
+                                <div class="login_result" id="login_result"></div>
+                                <div class="form-group mb-4">
+                                    <label for="email">Usuario o E-mail</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1"><span class="fas fa-envelope"></span></span>
+                                        <input type="email" class="form-control" placeholder="example@company.com" id="user" autofocus required>
+                                    </div>  
+                                </div>
+                                <!-- End of Form -->
+                                <div class="form-group">
+                                    <!-- Form -->
+                                    <div class="form-group mb-4">
+                                        <label for="password">Contrase&ntilde;a</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon2"><span class="fas fa-unlock-alt"></span></span>
+                                            <input type="password" placeholder="Password" class="form-control" id="pass" required>
+                                            <button style="background:transparent;border:0px solid" type="button" id="eyeshow"><i class="fas fa-eye"></i></button>
+                                        </div>  
+                                    </div>
+                                    <!-- End of Form -->
+                                    <div class="d-flex justify-content-between align-items-center mb-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="0" id="remember_me">
+                                            <label class="form-check-label" for="defaultCheck5">
+                                              Recuerdame
+                                            </label>
+                                        </div>
+                                        <div><a href="#" class="small text-right">Olvidaste Contrase&ntilde;a?</a></div>
+                                    </div>
+                                </div>
+                                <button type="button" id="login" class="btn btn-block btn-primary">Login</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<script src="vendor/popper.js/dist/umd/popper.min.js"></script>
+<script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="vendor/onscreen/dist/on-screen.umd.min.js"></script>
+<script src="vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+<script src="vendor/notyf/notyf.min.js"></script>
+<script src="vendor/volt/js/volt.js"></script>
+<script src="app/login/login.js" type="module"></script>
+<script src="app/login/model/funcion.js"></script>
+    
+</body>
+
+</html>
